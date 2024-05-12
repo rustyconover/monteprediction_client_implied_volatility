@@ -1,6 +1,8 @@
 name: Python CI
 
 on:
+  schedule:
+    - cron: "5 5 * * 0"
   push:
     branches:
       - main  # Change this to your main branch name
