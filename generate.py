@@ -35,6 +35,9 @@ num_samples_per_chunk = int(1048576 / 8)
 num_chunks = 8
 num_samples = num_chunks * num_samples_per_chunk
 
+print(f"""Running with email={os.environ["EMAIL"]}""")
+print(f"""name={os.environ["NAME"]}""")
+
 
 def simulate_stock_returns(sigma: float) -> float:
     """Generate simulated stock returns for a given volatility.
