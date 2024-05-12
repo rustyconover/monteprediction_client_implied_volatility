@@ -22,7 +22,6 @@ import pandas as pd
 import os
 import yfinance as yf
 import scipy.interpolate
-import numpy as np
 from scipy import stats
 from scipy.optimize import minimize
 from datetime import datetime, timedelta
@@ -61,12 +60,15 @@ def simulate_stock_returns(sigma: float) -> float:
 
     root = np.sqrt(dt)
 
-    # I know this is really slow, but its left as an exercise to the reader to improve it.
-    for i in range(days_to_simulate):
-        Z = np.random.normal(size=1)
-        S *= np.exp(np.cumsum((r - 0.5 * sigma**2) * dt + sigma * root * Z))
+    Z = np.random.normal(size=(days_to_simulate, num_samples))
 
-    return S[0]
+    S = 1 - (
+        np.prod(
+            np.exp(np.cumsum((r - 0.5 * sigma**2) * dt + sigma * root * Z, axis=0)),
+            axis=0,
+        )
+    )
+    return S
 
 
 def black_scholes_call(S, K, T, r, sigma):
@@ -162,7 +164,7 @@ for symbol in SPDR_ETFS:
     # near term options have more juice, so possibly smooth this out.
     atm_iv = np.mean(all_ivs)
 
-    results[symbol] = [1 - simulate_stock_returns(atm_iv) for i in range(num_samples)]
+    results[symbol] = simulate_stock_returns(atm_iv)
 
 df = pd.DataFrame(results)
 
