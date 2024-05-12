@@ -1,4 +1,4 @@
-# [Monteprediction.com](https://monteprediction.com) Predictor #1 - Simple IV
+# [Monteprediction.com](https://monteprediction.com) Client - Implied Volatility
 
 Author: Rusty Conover (rusty@conover.me)
 
