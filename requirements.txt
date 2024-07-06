@@ -3,7 +3,7 @@ appnope==0.1.4
 asttokens==2.4.1
 beautifulsoup4==4.12.3
 bspline==0.1.1
-certifi==2024.2.2
+certifi==2024.7.4
 charset-normalizer==3.3.2
 comm==0.2.2
 contourpy==1.2.1
